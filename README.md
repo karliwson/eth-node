@@ -59,6 +59,6 @@ http://<server_ip>:4646/ui/jobs
 
 # TODO
 
-- [x] Setup Docker static token authentication on the node to avoid having to specify credentials.
-- [x] Setup monitoring (in this config it doesn't make much sense to setup monitoring services on the same machine).
-- [x] Implement better health checks for the Ethereum node.
+- [ ] Setup Docker static token authentication on the node to avoid having to specify credentials.
+- [ ] Setup monitoring (in this config it doesn't make much sense to setup monitoring services on the same machine).
+- [ ] Implement better health checks for the Ethereum node.
