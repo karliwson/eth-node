@@ -1,0 +1,59 @@
+job "eth-node" {
+  datacenters = ["dc1"]
+
+  group "testnet" {
+    network {
+#      port "rpc" {
+#        to = "8545"
+#        static = "8545"
+#      }
+#      port "wsrpc" {
+#        to = "8546"
+#        static = "8546"
+#      }
+#      port "authrpc" {
+#        to = "8551"
+#        static = "8551"
+#      }
+      port "grpc" {
+        to = "9090"
+        static = "9090"
+      }
+      port "peering" {
+        to = "30303"
+        static = "30303"
+      }
+      port "snapsync" {
+        to = "42069"
+        static = "42069"
+      }
+      port "monitoring" {
+        to = "8080"
+        static = "8080"
+      }
+      port "metrics" {
+        to = "6060"
+        static = "6060"
+      }
+    }
+
+    task "erigon" {
+      driver = "docker"
+
+      config {
+        image = "kakafka/erigon:latest"
+        ports = [
+#          "rpc", "wsrpc", "authrpc",
+          "grpc",
+          "peering", "snapsync",
+          "monitoring", "metrics"
+        ]
+        auth {
+          username = "{{DOCKER_HUB_USERNAME}}"
+          password = "{{DOCKER_HUB_PASSWORD}}"
+        }
+        volumes = ["{{DATA_VOLUME_MOUNT_POINT}}/erigon:/data"]
+      }
+    }
+  }
+}

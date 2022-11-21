@@ -1,0 +1,36 @@
+- name: Deploy an Ethereum node
+  hosts: "{{SERVER_LIST}}"
+  become: yes
+
+  vars_files:
+    - eth-node-vars.yml
+
+  vars:
+    # Configuration for ngine_io.hashi.* roles
+    nomad_job__nomad_addr: "{{NOMAD_ADDR}}"
+    nomad__use_consul: true
+    nomad__client_plugin_docker_volume_enabled: true
+    nomad_job__job_templates:
+      - name: eth-node
+        path: eth-node.nomad
+
+  pre_tasks:
+    - name: Set server hostname
+      ansible.builtin.hostname:
+        name: "{{SERVER_HOSTNAME}}"
+
+    - name: Prepare data volume
+      when: DATA_VOLUME_DEVICE_NAME
+      ansible.builtin.script:
+        cmd: |
+          scripts/prepare-volume.sh                 \
+            DEVICE_NAME={{DATA_VOLUME_DEVICE_NAME}} \
+            FILESYSTEM={{DATA_VOLUME_FILESYSTEM}}   \
+            MOUNT_POINT={{DATA_VOLUME_MOUNT_POINT}} \
+            DATA_OWNER={{DATA_VOLUME_DATA_OWNER}}
+
+  roles:
+    - geerlingguy.docker
+    - ngine_io.hashi.consul
+    - ngine_io.hashi.nomad
+    - ngine_io.hashi.nomad_job

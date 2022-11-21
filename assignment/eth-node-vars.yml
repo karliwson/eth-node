@@ -1,0 +1,14 @@
+SERVER_LIST: nomad
+SERVER_HOSTNAME: eth-node
+NOMAD_ADDR: "http://127.0.0.1:4646"
+
+# Data volume configuration
+DATA_VOLUME_DEVICE_NAME: sdc
+DATA_VOLUME_FILESYSTEM: ext4
+DATA_VOLUME_MOUNT_POINT: /data
+DATA_VOLUME_DATA_OWNER: user
+
+# Docker hub credentials
+# TODO: Configure static auth token
+DOCKER_HUB_USERNAME: ""
+DOCKER_HUB_PASSWORD: ""

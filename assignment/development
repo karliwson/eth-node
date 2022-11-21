@@ -1,0 +1,17 @@
+[nomad_servers]
+example:22
+
+[nomad_clients]
+example:22
+
+[nomad:children]
+nomad_servers
+nomad_clients
+
+[consul:children]
+nomad
+
+[all:vars]
+ansible_user=
+ansible_ssh_user=
+ansible_ssh_private_key_file=

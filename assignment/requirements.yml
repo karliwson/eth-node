@@ -1,0 +1,7 @@
+roles:
+  - name: geerlingguy.docker
+    version: 6.0.3
+
+collections:
+  - name: ngine_io.hashi
+    version: 1.4.0
