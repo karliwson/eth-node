@@ -6,9 +6,9 @@ This Ansible playbook deploys a Nomad + Consul cluster into an Ubuntu Server 20.
 ## 1. Configure the environment:
 > Preserve the contents of the files and only change the mentioned values.
 
-### 1.1. Enter the assignment directory:
+### 1.1. Enter the `ansible` directory:
 ```bash
-cd assignment
+cd ansible
 ```
 ### 1.2. Set server info and credentials in the `development` inventory:
 ```ini
